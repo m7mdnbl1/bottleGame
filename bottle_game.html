@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottle Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        img {
+            margin-top: 20px;
+            border: solid yellowgreen 6px;
+        }
+
+        input,
+        button {
+            margin: 5px;
+        }
+        input {
+            padding: 10px 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result{
+            color: red;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Bottle Game</h1>
+    <img src="bottle_game.jpeg" width="500px" height="250px">
+    <p>Enter names separated by commas:</p>
+    <input type="text" id="namesInput" placeholder="e.g., ahmed, islam, sandra, Fatma, Ali">
+    <button onclick="pickTwoRandomNames()">Pick Two Random Names</button>
+
+    <p id="result"></p>
+
+    <script>
+        function pickTwoRandomNames() {
+            var input = document.getElementById('namesInput').value; // Get the input value from the text box
+            var names = input.split(',').map(name => name.trim()); // Split the input into an array of names
+
+            if (names.length < 2) { // Check that at least two names are entered
+                document.getElementById('result').textContent = 'Please enter at least two names.';
+                return;
+            }
+
+            var randomNames = [];
+            while (randomNames.length < 2) { // Pick two random names
+                var randomIndex = Math.floor(Math.random() * names.length); // Generate a random index
+                var name = names[randomIndex];
+                if (!randomNames.includes(name)) { // Ensure the name is not repeated
+                    randomNames.push(name);
+                }
+            }
+
+            document.getElementById('result').textContent = `Random names: ${randomNames.join(', ')}`;  // Display the selected names
+        }
+    </script>
+
+</body>
+
+</html>
